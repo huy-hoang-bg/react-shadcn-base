@@ -23,22 +23,10 @@ type NavLink = BaseNavItem & {
   items?: never
 }
 
-type NavCollapsible = BaseNavItem & {
-  items: (BaseNavItem & { url: LinkProps['to'] })[]
-  url?: never
-}
-
-type NavItem = NavCollapsible | NavLink
-
-interface NavGroup {
-  title: string
-  items: NavItem[]
-}
-
 interface SidebarData {
   user: User
   teams: Team[]
-  navGroups: NavGroup[]
+  items: NavLink[]
 }
 
-export type { SidebarData, NavGroup, NavItem, NavCollapsible, NavLink }
+export type { SidebarData, NavLink }
