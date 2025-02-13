@@ -28,7 +28,6 @@
     "^use-intl$",
     "^@radix-ui/(.*)$",
     "^@hookform/resolvers/zod$",
-    "^@tanstack/react-query$",
     "^@tanstack/react-router$",
     "^@tanstack/react-table$",
     "^@tabler/icons-react$",

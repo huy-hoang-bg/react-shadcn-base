@@ -1,17 +1,13 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   fixed?: boolean
   ref?: React.Ref<HTMLElement>
 }
 
-export const Header = ({
-  className,
-  fixed,
-  children,
-  ...props
-}: HeaderProps) => {
+export const Header = ({ className, fixed, ...props }: HeaderProps) => {
   const [offset, setOffset] = React.useState(0)
 
   React.useEffect(() => {
@@ -36,7 +32,9 @@ export const Header = ({
       )}
       {...props}
     >
-      {children}
+      <Button className='h-full self-end' variant='outline'>
+        Logout
+      </Button>
     </header>
   )
 }
