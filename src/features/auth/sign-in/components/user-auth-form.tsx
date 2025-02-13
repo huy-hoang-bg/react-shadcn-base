@@ -1,10 +1,11 @@
 import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
+import Cookies from 'js-cookie'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { faker } from '@faker-js/faker'
-import { useAuthStore } from '@/stores/authStore'
 import { cn } from '@/lib/utils'
+import { ACCESS_TOKEN, useAuth } from '@/context/auth-context'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -35,7 +36,7 @@ const formSchema = z.object({
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const authStore = useAuthStore.getState().auth
+  const { setUser } = useAuth()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -53,13 +54,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     console.log(data)
 
     setTimeout(() => {
-      const token = faker.internet.jwt({ header: { alg: 'HS256' } })
-      authStore.setAccessToken(token)
-      authStore.setUser({
-        accountNo: faker.string.numeric(),
+      Cookies.set(ACCESS_TOKEN, faker.internet.jwt())
+      setUser({
         email: faker.internet.email(),
-        exp: 24 * 60 * 60 * 1000,
-        role: faker.helpers.arrayElements(['admin', 'superAdmin']),
       })
       setIsLoading(false)
 
@@ -79,7 +76,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 <FormItem className='space-y-1'>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
+                    <Input
+                      placeholder='name@example.com'
+                      {...field}
+                      autoComplete='email'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -94,7 +95,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     <FormLabel>Password</FormLabel>
                   </div>
                   <FormControl>
-                    <PasswordInput {...field} />
+                    <PasswordInput {...field} autoComplete='current-password' />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { useLogout } from '@/hooks/use-logout'
+import { useAuth } from '@/context/auth-context'
 import { Button } from '../ui/button'
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
@@ -9,7 +9,8 @@ interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const Header = ({ className, fixed, ...props }: HeaderProps) => {
-  const { handleLogout } = useLogout()
+  const { handleLogout } = useAuth()
+
   const [offset, setOffset] = React.useState(0)
 
   React.useEffect(() => {

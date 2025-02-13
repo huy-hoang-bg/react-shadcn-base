@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
-import { useAuthStore } from '@/stores/authStore'
+import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
@@ -9,13 +8,6 @@ import { Main } from '@/components/layout/main'
 
 export const Route = createFileRoute('/_authenticated')({
   component: RouteComponent,
-  beforeLoad: () => {
-    const authStore = useAuthStore.getState().auth
-
-    if (!authStore.accessToken) {
-      return redirect({ to: '/sign-in' })
-    }
-  },
 })
 
 function RouteComponent() {
