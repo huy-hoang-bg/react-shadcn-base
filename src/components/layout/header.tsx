@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { useLogout } from '@/hooks/use-logout'
 import { Button } from '../ui/button'
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
@@ -8,6 +9,7 @@ interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const Header = ({ className, fixed, ...props }: HeaderProps) => {
+  const { handleLogout } = useLogout()
   const [offset, setOffset] = React.useState(0)
 
   React.useEffect(() => {
@@ -32,7 +34,11 @@ export const Header = ({ className, fixed, ...props }: HeaderProps) => {
       )}
       {...props}
     >
-      <Button className='h-full self-end' variant='outline'>
+      <Button
+        className='ml-auto h-full'
+        variant='outline'
+        onClick={handleLogout}
+      >
         Logout
       </Button>
     </header>
