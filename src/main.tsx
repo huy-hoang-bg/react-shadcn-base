@@ -10,7 +10,6 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { useAuthStore } from '@/stores/authStore'
 import { handleServerError } from '@/utils/handle-server-error'
 import { toast } from '@/hooks/use-toast'
-import { FontProvider } from './context/font-context'
 import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
@@ -68,7 +67,7 @@ const queryClient = new QueryClient({
           router.navigate({ to: '/500' })
         }
         if (error.response?.status === 403) {
-          // router.navigate("/forbidden", { replace: true });
+          router.navigate({ to: '/403', replace: true })
         }
       }
     },
@@ -97,9 +96,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <FontProvider>
-          <RouterProvider router={router} />
-        </FontProvider>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </StrictMode>
   )

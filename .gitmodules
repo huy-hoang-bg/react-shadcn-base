@@ -1,0 +1,3 @@
+[submodule "newE-sdk"]
+	path = newE-sdk
+	url = git@github.com:alt-develop/newE-sdk.git
