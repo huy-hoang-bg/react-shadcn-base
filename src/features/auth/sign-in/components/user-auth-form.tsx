@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { faker } from '@faker-js/faker'
 import { cn } from '@/lib/utils'
 import { ACCESS_TOKEN, useAuth } from '@/context/auth-context'
-import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -17,6 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { PrimaryButton } from '@/components/primary-button'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
@@ -68,16 +68,18 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn('grid gap-6', className)} {...props}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='grid gap-2'>
+          <div className='grid gap-4'>
             <FormField
               control={form.control}
               name='email'
               render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <FormLabel>Email</FormLabel>
+                <FormItem className='space-y-2'>
+                  <FormLabel className='text-2xl font-semibold'>
+                    メールアドレス
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      placeholder='name@example.com'
+                      placeholder='sample@neweai.com'
                       {...field}
                       autoComplete='email'
                     />
@@ -90,10 +92,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               control={form.control}
               name='password'
               render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <div className='flex items-center justify-between'>
-                    <FormLabel>Password</FormLabel>
-                  </div>
+                <FormItem className='space-y-2'>
+                  <FormLabel className='text-2xl font-semibold'>
+                    パスワード
+                  </FormLabel>
                   <FormControl>
                     <PasswordInput {...field} autoComplete='current-password' />
                   </FormControl>
@@ -101,9 +103,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={isLoading}>
-              Login
-            </Button>
+            <PrimaryButton className='mt-4' disabled={isLoading}>
+              ログイン
+            </PrimaryButton>
           </div>
         </form>
       </Form>

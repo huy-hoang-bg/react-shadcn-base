@@ -1,15 +1,8 @@
 import { LinkProps } from '@tanstack/react-router'
 
-interface User {
-  name: string
-  email: string
-  avatar: string
-}
-
-interface Team {
-  name: string
-  logo: React.ElementType
-  plan: string
+interface SidebarHeader {
+  thumbnail: string
+  description: string
 }
 
 interface BaseNavItem {
@@ -24,8 +17,7 @@ type NavLink = BaseNavItem & {
 }
 
 interface SidebarData {
-  user: User
-  teams: Team[]
+  header: SidebarHeader
   items: NavLink[]
 }
 

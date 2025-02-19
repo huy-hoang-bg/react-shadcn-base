@@ -133,6 +133,7 @@
     @apply border-border;
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--border)) transparent;
+    @apply text-gray-950;
   }
   html {
     @apply overflow-x-hidden;

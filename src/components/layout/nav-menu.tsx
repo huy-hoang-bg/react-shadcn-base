@@ -4,7 +4,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/components/ui/sidebar'
 import { Badge } from '../ui/badge'
 import { NavLink } from './types'
@@ -23,15 +22,15 @@ const NavBadge = ({ children }: { children: ReactNode }) => (
 )
 
 const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
-  const { setOpenMobile } = useSidebar()
   return (
-    <SidebarMenuItem>
+    <SidebarMenuItem className='h-12'>
       <SidebarMenuButton
+        className='h-full'
         asChild
         isActive={checkIsActive(href, item)}
         tooltip={item.title}
       >
-        <Link to={item.url} onClick={() => setOpenMobile(false)}>
+        <Link to={item.url}>
           {item.icon && <item.icon />}
           <span>{item.title}</span>
           {item.badge && <NavBadge>{item.badge}</NavBadge>}
